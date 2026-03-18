@@ -1,0 +1,178 @@
+<div class="min-h-screen flex items-center justify-center bg-background font-tron relative overflow-hidden">
+
+  <!-- Glow fundo -->
+  <div class="absolute w-[600px] h-[600px] bg-primary opacity-10 blur-3xl rounded-full"></div>
+
+  <!-- RENDER DINÂMICO -->
+  <ng-container
+    [ngTemplateOutlet]="
+      isCadastro ? cadastroTpl :
+      isRecuperar ? recuperarTpl :
+      loginTpl
+    ">
+  </ng-container>
+
+</div>
+
+<!-- ================= LOGIN ================= -->
+<ng-template #loginTpl>
+
+  <div class="w-full max-w-md p-8 rounded-2xl border border-primary shadow-neon backdrop-blur-md z-10">
+
+    <h1 class="text-secondary shadow-neon-white pulse-neon text-3xl text-center mb-8 tracking-widest">
+      SYSTEM ACCESS
+    </h1>
+
+    <form class="flex flex-col gap-6">
+
+      <div class="flex flex-col">
+        <label class="text-secondary mb-1">Nickname / Email</label>
+        <input type="text"
+          placeholder="Digite seu acesso..."
+          class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+      </div>
+
+      <div class="flex flex-col">
+        <label class="text-secondary mb-1">Senha</label>
+        <input type="password"
+          placeholder="••••••••"
+          class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+      </div>
+
+      <button
+        class="mt-2 bg-primary text-black font-bold py-2 rounded-md shadow-neon hover:scale-105 transition">
+        ENTRAR
+      </button>
+
+    </form>
+
+    <div class="flex justify-between mt-6 text-sm">
+
+      <a (click)="abrirCadastro()"
+         class="cursor-pointer text-secondary hover:text-primary transition">
+        Criar usuário
+      </a>
+
+      <a (click)="abrirRecuperar()"
+         class="cursor-pointer text-secondary hover:text-primary transition">
+        Recuperar acesso
+      </a>
+
+    </div>
+
+  </div>
+
+</ng-template>
+
+<!-- ================= CADASTRO ================= -->
+<ng-template #cadastroTpl>
+
+  <div class="w-full max-w-md system-enter">
+    <div class="p-8 rounded-2xl border border-primary shadow-neon backdrop-blur-md">
+
+      <h1 class="text-secondary shadow-neon-white text-2xl text-center mb-6 tracking-widest">
+        NEW USER
+      </h1>
+
+      <form class="flex flex-col gap-5">
+
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-20 h-20 rounded-full border border-primary flex items-center justify-center text-white">
+            ?
+          </div>
+          <input type="file" class="text-xs text-secondary">
+        </div>
+
+        <input type="text" placeholder="Username"
+          class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+        <input type="email" placeholder="Email"
+          class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+        <input type="password" placeholder="Senha"
+          class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+        <button type="button"
+          class="border border-primary text-primary py-2 rounded-md hover:shadow-neon transition">
+          CONTINUAR COM GOOGLE
+        </button>
+
+        <button
+          class="bg-primary text-black font-bold py-2 rounded-md shadow-neon hover:scale-105 transition">
+          CRIAR CONTA
+        </button>
+
+      </form>
+
+      <div class="mt-6 text-center">
+        <button (click)="voltarLogin()"
+          class="text-secondary hover:text-primary transition">
+          Voltar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</ng-template>
+
+<!-- ================= RECUPERAR ================= -->
+<ng-template #recuperarTpl>
+
+  <div class="w-full max-w-md system-enter">
+
+    <div class="p-8 rounded-2xl border border-primary shadow-neon backdrop-blur-md">
+
+      <h1 class="text-secondary shadow-neon-white text-2xl text-center mb-6 tracking-widest">
+        RECOVER ACCESS
+      </h1>
+
+      <form class="flex flex-col gap-5">
+
+        <input type="email"
+          placeholder="Digite seu email"
+          class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+        <button type="button"
+          (click)="enviarEmail()"
+          class="bg-primary text-black font-bold py-2 rounded-md shadow-neon hover:scale-105 transition">
+          ENVIAR CÓDIGO
+        </button>
+
+        <p *ngIf="emailEnviado"
+           class="text-secondary text-sm text-center shadow-neon-white">
+          Enviamos um email para que você recupere sua senha
+        </p>
+
+        <div *ngIf="emailEnviado" class="flex flex-col gap-4">
+
+          <input type="text" placeholder="Código recebido"
+            class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+          <input type="password" placeholder="Nova senha"
+            class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+          <input type="password" placeholder="Confirmar senha"
+            class="bg-transparent border border-primary px-4 py-2 rounded-md text-white focus:shadow-neon"/>
+
+          <button
+            class="bg-primary text-black font-bold py-2 rounded-md shadow-neon hover:scale-105 transition">
+            RESETAR SENHA
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="mt-6 text-center">
+        <button (click)="voltarLogin()"
+          class="text-secondary hover:text-primary transition">
+          Voltar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-template>

@@ -1,0 +1,1 @@
+formato de transição dos dados para o nosso backend

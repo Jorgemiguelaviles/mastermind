@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #00f0ff;
+    --color-secondary: #ffffff;
+    --color-tertiary: #7cff00;
+    --color-background: #0a0a0f;
+
+    --font-tron: "Orbitron", sans-serif;
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    font-family: var(--font-tron);
+  }
+}
+
+@layer utilities {
+  .bg-primary { background-color: var(--color-primary) !important; }
+  .text-primary { color: var(--color-primary) !important; }
+  .text-secondary { color: var(--color-secondary) !important; }
+  .bg-background { background-color: var(--color-background) !important; }
+  .border-primary { border-color: var(--color-primary) !important; }
+  .shadow-neon { box-shadow: 0 0 24px 0 var(--color-primary); }
+}

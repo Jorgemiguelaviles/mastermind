@@ -1,0 +1,1 @@
+garantir que o usuario esteja logado para poder de fato acessar a nossa aplicação

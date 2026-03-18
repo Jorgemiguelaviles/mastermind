@@ -1,0 +1,1 @@
+(se) der tempo sera um passo a passo de como o nosso frontend funciona
