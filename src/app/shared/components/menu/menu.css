@@ -1,0 +1,102 @@
+/* =========================
+   BOOT ANIMATION
+========================= */
+
+@keyframes bootFlicker {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(1.01);
+  }
+
+  60% {
+    opacity: 1;
+    filter: blur(2px);
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.boot-screen {
+  animation: bootFlicker 1.6s ease-out forwards;
+  will-change: opacity, transform, filter;
+}
+
+
+/* =========================
+   TRANSIÇÃO ENTRE ABAS
+========================= */
+
+@keyframes tabSwitch {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  40% {
+    opacity: 0.4;
+    filter: brightness(0.5);
+    transform: scale(0.985);
+  }
+
+  60% {
+    opacity: 0;
+    filter: brightness(0.2);
+    transform: scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+.tab-switch {
+  animation: tabSwitch 0.65s ease-out forwards;
+  will-change: opacity, transform, filter;
+}
+
+
+/* =========================
+   BOTÃO GLOW (UNIFICADO)
+========================= */
+
+.btn-glow {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* hover universal (serve pra circular e retangular) */
+.btn-glow:hover {
+  box-shadow:
+    inset 0 0 12px rgba(0, 255, 255, 0.35),
+    inset 0 0 22px rgba(0, 255, 255, 0.2),
+    0 0 10px rgba(0, 255, 255, 0.25);
+
+  transform: translateY(-1px) scale(1.03);
+}
+
+/* camada de brilho interno */
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.btn-glow:hover::before {
+  opacity: 1;
+}

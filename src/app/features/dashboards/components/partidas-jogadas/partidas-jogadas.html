@@ -1,0 +1,36 @@
+<div class="w-full flex flex-col gap-6 items-center px-2 sm:px-4">
+
+  <!-- HEADER -->
+  <h2 class="text-white text-lg font-bold tracking-widest text-center">
+    Partidas Jogadas
+  </h2>
+
+  <!-- GRAFICO PIZZA -->
+  <div class="w-full max-w-[220px] xs:max-w-[240px] sm:max-w-sm md:max-w-lg
+              bg-black/40 border border-primary rounded-xl p-4 flex flex-col items-center">
+
+    <h3 class="text-secondary text-sm mb-3 tracking-widest text-center">
+      Dificuldade
+    </h3>
+
+    <div class="w-full h-[180px] sm:h-[230px] md:h-[300px] flex justify-center">
+      <canvas id="pieChart" class="w-full h-full"></canvas>
+    </div>
+
+  </div>
+
+  <!-- GRAFICO COLUNAS -->
+  <div class="w-full max-w-[220px] xs:max-w-[240px] sm:max-w-sm md:max-w-lg
+              bg-black/40 border border-primary rounded-xl p-4">
+
+    <h3 class="text-secondary text-sm mb-3 tracking-widest text-center">
+      Dificuldade (Partidas)
+    </h3>
+
+    <div class="w-full h-[180px] sm:h-[230px] md:h-[320px]">
+      <canvas id="barChart" class="w-full h-full"></canvas>
+    </div>
+
+  </div>
+
+</div>

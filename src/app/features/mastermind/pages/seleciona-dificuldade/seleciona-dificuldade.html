@@ -1,0 +1,86 @@
+<div class="flex-1 flex items-center justify-center">
+
+  <app-layout-conteiner
+    [isSwitchingTab]="isSwitchingTab"
+    [isBooting]="isBooting"
+  >
+
+    <div class="h-full flex flex-col items-center justify-center text-center gap-10">
+
+      <!-- 🎯 TÍTULO -->
+      <h1 class="text-4xl md:text-5xl font-bold
+                 text-primary tracking-widest
+                 drop-shadow-[0_0_15px_#00ffff]">
+        SELECIONE A DIFICULDADE
+      </h1>
+
+      <!-- 🎮 BOTÕES -->
+      <div class="w-full max-w-md flex flex-col gap-6">
+
+        <!-- FÁCIL -->
+        <button
+          (click)="selecionarDificuldade('facil')"
+          class="py-4 rounded-xl border border-primary
+                 text-secondary tracking-widest
+                 backdrop-blur-md shadow-neon
+                 transition
+                 hover:scale-105
+                 hover:bg-green-400/20
+                 hover:shadow-[0_0_20px_#00ff88]">
+
+          FÁCIL
+
+        </button>
+
+        <!-- MÉDIO -->
+        <button
+          (click)="selecionarDificuldade('medio')"
+          class="py-4 rounded-xl border border-primary
+                 text-secondary tracking-widest
+                 backdrop-blur-md shadow-neon
+                 transition
+                 hover:scale-105
+                 hover:bg-blue-400/20
+                 hover:shadow-[0_0_20px_#00ccff]">
+
+          MÉDIO
+
+        </button>
+
+        <!-- DIFÍCIL -->
+        <button
+          (click)="selecionarDificuldade('dificil')"
+          class="py-4 rounded-xl border border-primary
+                 text-secondary tracking-widest
+                 backdrop-blur-md shadow-neon
+                 transition
+                 hover:scale-105
+                 hover:bg-yellow-400/20
+                 hover:shadow-[0_0_20px_#ffcc00]">
+
+          DIFÍCIL
+
+        </button>
+
+        <!-- INSANO -->
+        <button
+          (click)="selecionarDificuldade('insano')"
+          class="py-4 rounded-xl border border-primary
+                 text-secondary tracking-widest
+                 backdrop-blur-md shadow-neon
+                 transition
+                 hover:scale-105
+                 hover:bg-red-400/20
+                 hover:shadow-[0_0_20px_#ff3366]">
+
+          INSANO
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </app-layout-conteiner>
+
+</div>

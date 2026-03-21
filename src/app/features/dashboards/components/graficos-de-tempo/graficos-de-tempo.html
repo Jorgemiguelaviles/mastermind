@@ -1,0 +1,45 @@
+<div class="w-full flex flex-col items-center gap-4">
+
+  <!-- OPTIONS -->
+  <div class="w-full max-w-[240px] md:max-w-md flex flex-col gap-3">
+
+    <button
+      (click)="setTipo('partidas')"
+      [class.bg-primary]="tipo === 'partidas'"
+      [class.text-black]="tipo === 'partidas'"
+      class="w-full px-4 py-2 rounded-lg border border-primary
+             text-secondary transition btn-glow text-sm md:text-base">
+      Partidas jogadas
+    </button>
+
+    <button
+      (click)="setTipo('pontuacao')"
+      [class.bg-primary]="tipo === 'pontuacao'"
+      [class.text-black]="tipo === 'pontuacao'"
+      class="w-full px-4 py-2 rounded-lg border border-primary
+             text-secondary transition btn-glow text-sm md:text-base">
+      Pontuação
+    </button>
+
+    <button
+      (click)="setTipo('posicao')"
+      [class.bg-primary]="tipo === 'posicao'"
+      [class.text-black]="tipo === 'posicao'"
+      class="w-full px-4 py-2 rounded-lg border border-primary
+             text-secondary transition btn-glow text-sm md:text-base">
+      Posição
+    </button>
+
+  </div>
+
+  <!-- GRAFICO -->
+  <div class="w-full max-w-[240px] md:max-w-md bg-black/30 rounded-xl p-4 h-[220px] md:h-[300px]">
+
+    <canvas
+      #chartCanvas
+      class="w-full h-full">
+    </canvas>
+
+  </div>
+
+</div>

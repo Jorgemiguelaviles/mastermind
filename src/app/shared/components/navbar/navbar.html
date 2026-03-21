@@ -1,0 +1,61 @@
+<!-- BOTÃO MOBILE -->
+<div class="md:hidden w-full flex justify-end p-2">
+  <button
+    (click)="toggleMenu()"
+    class="text-secondary text-2xl px-3 py-1 rounded-md border border-primary btn-glow"
+  >
+    ☰
+  </button>
+</div>
+
+<!-- NAVBAR -->
+<div
+  class="w-full border-b border-primary backdrop-blur-md shadow-neon
+         transition-all duration-300 overflow-hidden md:overflow-visible"
+  [class.boot-screen]="isBooting"
+  [class.max-h-0]="!menuOpen"
+  [class.max-h-60]="menuOpen"
+  [class.opacity-0]="!menuOpen"
+  [class.opacity-100]="menuOpen"
+  [class.md:max-h-full]="true"
+  [class.md:opacity-100]="true"
+>
+
+  <div class="flex flex-col md:flex-row w-full">
+
+    <!-- JOGO -->
+    <button
+      (click)="trocarAba('main'); fecharMobile()"
+      [ngClass]="abaSelecionada === 'main' ? 'bg-primary text-black' : 'text-secondary'"
+      class="flex-1 flex items-center justify-center gap-2 py-3
+             border-b md:border-b-0 md:border-r border-primary
+             transition hover:bg-primary/20 btn-glow">
+
+      <span class="text-base">🎮</span>
+      <span class="text-xs tracking-widest">JOGO</span>
+    </button>
+
+    <!-- RANKING -->
+    <button
+      (click)="trocarAba('ranking'); fecharMobile()"
+      [ngClass]="abaSelecionada === 'ranking' ? 'bg-primary text-black' : 'text-secondary'"
+      class="flex-1 flex items-center justify-center gap-2 py-3
+             border-b md:border-b-0 md:border-r border-primary
+             transition hover:bg-primary/20 btn-glow">
+
+      <span class="text-base">🏆</span>
+      <span class="text-xs tracking-widest">RANKING</span>
+    </button>
+
+    <!-- DASHBOARD -->
+    <button
+      (click)="trocarAba('dashboard'); fecharMobile()"
+      [ngClass]="abaSelecionada === 'dashboard' ? 'bg-primary text-black' : 'text-secondary'"
+      class="flex-1 flex items-center justify-center gap-2 py-3
+             transition hover:bg-primary/20 btn-glow">
+
+      <span class="text-base">📊</span>
+      <span class="text-xs tracking-widest">DASHBOARD</span>
+    </button>
+
+  </div>

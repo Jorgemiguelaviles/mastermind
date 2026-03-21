@@ -9,6 +9,6 @@ import { CommonModule } from "@angular/common";
     RecuperarAcessoRoutingModule,
     CommonModule
   ],
-  exports: []
+  exports: [RecuperarAcessoComponent]
 })
 export class RecuperarAcessoModule { }

@@ -1,0 +1,74 @@
+<app-navbar
+  [abaSelecionada]="abaSelecionada"
+  (onTrocarAba)="trocarAbaComEfeito($event)"
+  [isBooting]="isBooting"
+  [isSwitchingTab]="isSwitchingTab"
+></app-navbar>
+
+<div class="min-h-screen flex flex-col px-4 py-6">
+
+  <!-- CONTAINER PADRÃO -->
+  <app-layout-conteiner
+    [isSwitchingTab]="isSwitchingTab"
+    [isBooting]="isBooting"
+  >
+
+    <!-- 🔧 FILTROS -->
+    <div class="w-full mb-6
+                rounded-2xl border border-primary
+                backdrop-blur-md shadow-neon p-4">
+
+      <h2 class="text-secondary text-sm tracking-widest mb-2">
+        FILTROS
+      </h2>
+
+      <div class="flex items-center justify-center text-secondary">
+        <app-filtros-gerais></app-filtros-gerais>
+      </div>
+
+    </div>
+
+    <!-- GRID PRINCIPAL -->
+    <div class="flex flex-col md:flex-row gap-6 flex-1">
+
+      <!-- ⬅️ ESQUERDA -->
+      <div class="flex flex-col gap-6 w-full md:w-1/2">
+
+        <div class="flex-1
+                    rounded-2xl border border-primary
+                    backdrop-blur-md shadow-neon
+                    p-4 flex flex-col">
+
+          <h2 class="text-secondary text-sm tracking-widest mb-3">
+            TEMPO DE PARTIDA
+          </h2>
+
+          <div class="flex-1 flex items-start md:items-center justify-center text-secondary">
+            <app-graficos-de-tempo></app-graficos-de-tempo>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ➡️ DIREITA -->
+      <div class="w-full md:w-1/2
+                  rounded-2xl border border-primary
+                  backdrop-blur-md shadow-neon
+                  p-4 flex flex-col">
+
+        <h2 class="text-secondary text-sm tracking-widest mb-3">
+          PARTIDAS JOGADAS
+        </h2>
+
+        <div class="flex-1 flex items-start md:items-center justify-center text-secondary">
+          <app-partidas-jogadas></app-partidas-jogadas>
+        </div>
+
+      </div>
+
+    </div>
+
+  </app-layout-conteiner>
+
+</div>

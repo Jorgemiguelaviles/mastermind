@@ -1,0 +1,65 @@
+table-row-hover {
+  transition: all 0.2s ease;
+}
+
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid #00ffff;
+  border-right: 2px solid #00ffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  box-shadow: 0 0 6px #00ffff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   TROCA DE ABAS
+========================= */
+
+@keyframes tabSwitch {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  40% {
+    opacity: 0.4;
+    filter: brightness(0.5);
+    transform: scale(0.985);
+  }
+
+  60% {
+    opacity: 0;
+    filter: brightness(0.2);
+    transform: scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+.tab-switch {
+  animation: tabSwitch 0.65s ease-out forwards;
+  will-change: opacity, transform, filter;
+}
+
+overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+overflow-x-auto::-webkit-scrollbar-thumb {
+  background: rgba(0,255,255,0.4);
+  border-radius: 999px;
+}

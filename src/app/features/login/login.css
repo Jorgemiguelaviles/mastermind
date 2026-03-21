@@ -1,72 +1,18 @@
-.shadow-neon-white {
-  color: #ffffff;
-  text-shadow:
-    0 0 4px #00f0ff,
-    0 0 8px #00f0ff,
-    0 0 16px #00f0ff;
+.blink {
+  animation: piscar 1s infinite;
 }
 
-.border-neon-white {
-  border-color: #ffffff;
-  box-shadow:
-    0 0 6px #00f0ff,
-    0 0 12px #00f0ff;
+@keyframes piscar {
+  0% { opacity: 1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; }
 }
 
-.input-neon-white:focus {
-  box-shadow:
-    0 0 8px #00f0ff,
-    0 0 16px #00f0ff;
-}
-
-@keyframes neon-pulse {
-  0%, 100% {
-    text-shadow:
-      0 0 4px #00f0ff,
-      0 0 8px #00f0ff;
-  }
-  50% {
-    text-shadow:
-      0 0 8px #00f0ff,
-      0 0 20px #00f0ff;
-  }
-}
-
-.pulse-neon {
-  animation: neon-pulse 2s infinite ease-in-out;
-}
-
-
-@keyframes fadeOutSystem {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.95);
-    filter: blur(4px);
-  }
-}
-
-@keyframes fadeInSystem {
-  0% {
-    opacity: 0;
-    transform: scale(1.05);
-    filter: blur(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-}
-
-.system-exit {
-  animation: fadeOutSystem 0.4s forwards;
-}
-
-.system-enter {
-  animation: fadeInSystem 0.5s ease-out forwards;
+/* título subindo + sumindo suave */
+.move-up {
+  transform: translateY(-220px) scale(0.92);
+  opacity: 0;
+  transition: 
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.8s ease;
 }

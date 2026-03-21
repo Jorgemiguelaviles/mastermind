@@ -6,9 +6,8 @@ import { CommonModule } from "@angular/common";
 @NgModule({
   declarations: [MastermindComponent],
   imports: [
-MastermindRoutingModule,
-    CommonModule
-  ],
-  exports: []
+    CommonModule,
+    MastermindRoutingModule
+  ]
 })
 export class MastermindModule { }

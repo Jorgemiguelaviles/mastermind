@@ -1,36 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css'],
   standalone: false,
 })
 export class LoginComponent {
 
-  isCadastro = false;
-  isRecuperar = false;
-  emailEnviado = false;
+  fase: 'intro' | 'login' = 'intro';
 
-  abrirCadastro() {
-  this.isCadastro = true;
-  this.isRecuperar = false;
-}
+  piscando = false;
+  esconderTexto = false;
+  animouTitulo = false;
 
-abrirRecuperar() {
-  this.isRecuperar = true;
-  this.isCadastro = false;
-  this.emailEnviado = false;
-}
+  animando = false;
+  tela: 'login' | 'cadastro' | 'recuperar' = 'login';
 
-voltarLogin() {
-  this.isCadastro = false;
-  this.isRecuperar = false;
-  this.emailEnviado = false;
-}
+  private iniciou = false;
 
-enviarEmail() {
-  this.emailEnviado = true;
-}
+  @HostListener('document:keydown')
+  @HostListener('document:click')
+  iniciar() {
+    if (this.fase !== 'intro' || this.iniciou) return;
 
+    this.iniciou = true;
+
+    this.piscando = true;
+
+    setTimeout(() => {
+      this.esconderTexto = true;
+    }, 1000);
+
+    setTimeout(() => {
+      this.animouTitulo = true;
+    }, 1300);
+
+    setTimeout(() => {
+      this.fase = 'login';
+    }, 2200);
+  }
+
+  trocarTela(nova: 'login' | 'cadastro' | 'recuperar') {
+    this.animando = true;
+
+    setTimeout(() => {
+      this.tela = nova;
+      this.animando = false;
+    }, 400);
+  }
 }

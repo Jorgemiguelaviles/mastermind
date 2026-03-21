@@ -1,0 +1,34 @@
+/* =========================
+   TROCA DE ABAS
+========================= */
+
+@keyframes tabSwitch {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  40% {
+    opacity: 0.4;
+    filter: brightness(0.5);
+    transform: scale(0.985);
+  }
+
+  60% {
+    opacity: 0;
+    filter: brightness(0.2);
+    transform: scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+.tab-switch {
+  animation: tabSwitch 0.65s ease-out forwards;
+  will-change: opacity, transform, filter;
+}

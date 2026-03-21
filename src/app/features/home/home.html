@@ -1,0 +1,30 @@
+  <app-navbar
+    [abaSelecionada]="abaSelecionada"
+    (onTrocarAba)="trocarAbaComEfeito($event)"
+    [isBooting]="isBooting"
+    [isSwitchingTab]="isSwitchingTab"
+  ></app-navbar>
+
+
+<app-layout-conteiner
+  [isSwitchingTab]="isSwitchingTab"
+  [isBooting]="isBooting"
+>
+
+
+  <!-- 👑 BEM-VINDO -->
+  <div class="w-full flex justify-center mb-8">
+    <h1 class="text-5xl md:text-6xl font-bold
+               text-primary tracking-widest
+               text-center
+               drop-shadow-[0_0_15px_#00ffff]">
+      Bem-vindo, {{ nomeUsuario }}
+    </h1>
+  </div>
+
+  <!-- JOGO -->
+  <div class="text-secondary text-3xl tracking-widest mb-6">
+    <app-jogo></app-jogo>
+  </div>
+
+</app-layout-conteiner>

@@ -1,0 +1,79 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-4 py-6">
+
+  <!-- CONTAINER -->
+<div class="w-full max-w-3xl
+            rounded-2xl border border-primary
+            backdrop-blur-md shadow-neon
+            flex flex-col overflow-hidden
+            animate-fade-in">
+
+    <!-- HEADER -->
+    <div class="border-b border-primary p-5 text-center">
+
+      <h1 class="text-3xl text-primary tracking-widest">
+        REGRAS
+      </h1>
+
+    </div>
+
+    <!-- CONTEÚDO (SCROLL) -->
+    <div class="p-6 overflow-y-auto max-h-[65vh] text-secondary space-y-4
+                custom-scroll">
+
+      Como Jogar Mastermind
+        Mastermind é um jogo de lógica e dedução em que o objetivo é descobrir uma sequência secreta de cores criada pelo sistema. O jogador deve usar raciocínio lógico e as pistas fornecidas após cada tentativa para chegar à combinação correta dentro de um número limitado de tentativas.
+        No início de cada partida, o sistema gera automaticamente uma sequência secreta composta por cores. Essa sequência permanece oculta durante todo o jogo, e o jogador precisa descobri-la por meio de tentativas e análise das respostas fornecidas pelo sistema.
+        Durante cada rodada, o jogador escolhe uma sequência de cores e envia sua tentativa. Após isso, o sistema analisa a tentativa e retorna algumas pistas que indicam o quão próxima aquela sequência está da combinação correta.
+        Essas pistas são representadas por indicadores que ajudam o jogador a entender quais partes da tentativa estão corretas e quais precisam ser ajustadas.
+        Os indicadores funcionam da seguinte forma:
+        • Um indicador de cor preta significa que uma das cores escolhidas pelo jogador está correta e também está na posição correta dentro da sequência.
+        • Um indicador de cor branca significa que uma das cores escolhidas está correta, porém foi colocada na posição errada.
+        Essas pistas não indicam exatamente qual posição está correta ou qual cor gerou a pista. O jogador deve usar lógica e análise para interpretar as informações e melhorar suas próximas tentativas.
+        Por exemplo, imagine que o jogador faça a seguinte tentativa:
+        🔴 🔵 🟢 🟡
+        E o sistema retorne as pistas:
+        ⚫ ⚪
+        Isso significa que:
+        • Uma das cores está correta e na posição correta.
+        • Outra cor está correta, porém na posição errada.
+        A partir dessas informações, o jogador precisa ajustar sua próxima tentativa tentando aproximar-se cada vez mais da sequência secreta.
+        Cada partida possui um número limitado de tentativas. Normalmente, o jogador terá até 10 tentativas para descobrir a sequência correta. Se a sequência for descoberta dentro desse limite, o jogador vence a partida. Caso contrário, o jogo termina e a sequência secreta é revelada.
+
+    </div>
+
+    <!-- FOOTER / AÇÃO -->
+    <div class="border-t border-primary p-4 flex justify-between">
+
+      <button
+        class="px-6 py-2 rounded-md border border-primary
+               text-secondary tracking-widest
+               transition hover:bg-primary/20 btn-glow  hover:scale-105
+         hover:bg-primary/20
+         hover:shadow-[0_0_20px_#00ffff]
+         hover:border-cyan-300"
+         (click)="voltar()"
+         >
+
+
+        VOLTAR
+
+      </button>
+
+      <button
+        class="px-6 py-2 rounded-md border border-primary
+               text-secondary tracking-widest
+               transition hover:bg-primary/20 btn-glow  hover:scale-105
+         hover:bg-primary/20
+         hover:shadow-[0_0_20px_#00ffff]
+         hover:border-cyan-300"
+         (click)="iniciarJogo()">
+
+        INICIAR JOGO
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

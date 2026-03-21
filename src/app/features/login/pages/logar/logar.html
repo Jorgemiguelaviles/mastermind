@@ -1,1 +1,70 @@
-<p>logar works!</p>
+<div class="w-full max-w-md sm:max-w-lg md:max-w-md p-6 sm:p-8
+            rounded-2xl border border-primary shadow-neon backdrop-blur-md system-enter"
+     [class.system-exit]="saindo">
+
+  <h1 class="text-secondary shadow-neon-white pulse-neon
+             text-2xl sm:text-3xl text-center mb-6 sm:mb-8 tracking-widest">
+    SYSTEM ACCESS
+  </h1>
+
+  <form [formGroup]="form" class="flex flex-col gap-4 sm:gap-6">
+    <div class="flex flex-col">
+      <label class="text-secondary mb-1 text-sm sm:text-base">
+        Nickname / Email
+      </label>
+
+      <input
+        type="text"
+        formControlName="usuario"
+        placeholder="Digite seu acesso..."
+        class="bg-transparent border border-primary px-3 py-2 sm:px-4 sm:py-2.5
+               rounded-md text-white focus:shadow-neon text-sm sm:text-base"
+      />
+
+      <small class="text-red-400 text-xs"
+        *ngIf="form.get('usuario')?.invalid && form.get('usuario')?.touched">
+        Campo obrigatório
+      </small>
+    </div>
+    <div class="flex flex-col">
+      <label class="text-secondary mb-1 text-sm sm:text-base">
+        Senha
+      </label>
+
+      <input
+        type="password"
+        formControlName="senha"
+        placeholder="••••••••"
+        class="bg-transparent border border-primary px-3 py-2 sm:px-4 sm:py-2.5
+               rounded-md text-white focus:shadow-neon text-sm sm:text-base"
+      />
+
+      <small class="text-red-400 text-xs"
+        *ngIf="form.get('senha')?.invalid && form.get('senha')?.touched">
+        Campo obrigatório
+      </small>
+    </div>
+    <button
+      type="button"
+      class="mt-2 bg-primary text-black font-bold py-2 sm:py-2.5
+             rounded-md shadow-neon hover:scale-105 transition text-sm sm:text-base
+             disabled:opacity-50"
+      [disabled]="form.invalid"
+      (click)="logar()">
+
+      ENTRAR
+    </button>
+
+  </form>
+
+  <div class="flex flex-col sm:flex-row justify-between items-center
+              gap-2 sm:gap-0 mt-5 sm:mt-6 text-sm">
+
+    <a (click)="abrirCadastro()"
+       class="cursor-pointer text-secondary hover:text-primary transition">
+      Criar usuário
+    </a>
+
+  </div>
+
+</div>

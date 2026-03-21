@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-mastermind',
   templateUrl: './mastermind.html',
@@ -7,5 +6,7 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class MastermindComponent {
-
+ 
 }
+
+

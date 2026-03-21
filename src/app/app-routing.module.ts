@@ -17,23 +17,33 @@ const routes: Routes = [
 
   {
     path: '',
-    canActivate: [], // futuramente seu AuthGuard
+    // canActivate: [], 
     children: [
       {
         path: 'main',
         loadChildren: () =>
-          import('./features/main/main.module').then(m => m.MainModule)
+          import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'historico',
+        path: 'dashboard',
         loadChildren: () =>
-          import('./features/historico/historico.module').then(m => m.HistoricoModule)
+          import('./features/dashboards/dashboard.module').then(m => m.DashboardsModule)
+      },
+      {
+        path: 'ranking',
+        loadChildren: () =>
+          import('./features/ranking/ranking.module').then(m => m.RankingModule)
       },
       {
         path: 'mastermind',
         loadChildren: () =>
           import('./features/mastermind/mastermind.module').then(m => m.MastermindModule)
       },
+       {
+  path: 'tutorial',
+  loadChildren: () =>
+    import('./features/regras/regras.module').then(m => m.RegrasModule)
+},
     ]
   },
 

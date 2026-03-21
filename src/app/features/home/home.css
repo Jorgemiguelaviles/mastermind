@@ -1,0 +1,110 @@
+/* carregamento das telas */
+
+
+/* =========================
+   BOOT / ENTRADA DA TELA
+========================= */
+
+@keyframes bootFlicker {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(1.01);
+  }
+
+  60% {
+    opacity: 1;
+    filter: blur(2px);
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.boot-screen {
+  animation: bootFlicker 1.6s ease-out forwards;
+  will-change: opacity, transform, filter;
+}
+
+
+/* =========================
+   TROCA DE ABAS
+========================= */
+
+@keyframes tabSwitch {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  40% {
+    opacity: 0.4;
+    filter: brightness(0.5);
+    transform: scale(0.985);
+  }
+
+  60% {
+    opacity: 0;
+    filter: brightness(0.2);
+    transform: scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+.tab-switch {
+  animation: tabSwitch 0.65s ease-out forwards;
+  will-change: opacity, transform, filter;
+}
+
+/* =========================
+   SCROLL PERSONALIZADO
+========================= */
+
+.custom-scroll {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #00f5ff22 transparent;
+}
+
+/* Chrome / Edge / Safari */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 245, 255, 0.35),
+    rgba(0, 245, 255, 0.1)
+  );
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.15);
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 245, 255, 0.6),
+    rgba(0, 245, 255, 0.2)
+  );
+
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.35);
+}

@@ -1,0 +1,62 @@
+.shadow-neon-white {
+  color: #ffffff;
+  text-shadow:
+    0 0 4px #00f0ff,
+    0 0 8px #00f0ff,
+    0 0 16px #00f0ff;
+}
+
+@keyframes fadeInSystem {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.system-enter {
+  animation: fadeInSystem 0.5s ease-out forwards;
+}
+
+
+/* loader estilo neon */
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-top: 2px solid #00ffff;
+  border-right: 2px solid #00ffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  box-shadow: 0 0 8px #00ffff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* saída suave */
+.system-exit {
+  animation: exitSmooth 0.8s forwards;
+}
+
+@keyframes exitSmooth {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(40px);
+    filter: blur(6px);
+  }
+}

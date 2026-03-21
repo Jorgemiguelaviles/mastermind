@@ -1,0 +1,113 @@
+  <app-navbar
+    [abaSelecionada]="abaSelecionada"
+    (onTrocarAba)="trocarAbaComEfeito($event)"
+    [isBooting]="isBooting"
+    [isSwitchingTab]="isSwitchingTab"
+  ></app-navbar>
+
+
+  <app-layout-conteiner
+  [isSwitchingTab]="isSwitchingTab"
+  [isBooting]="isBooting"
+>
+
+  <div class="w-full">
+
+  <!-- CONTAINER -->
+  <div class="w-full
+              rounded-2xl border border-primary
+              backdrop-blur-md shadow-neon
+              overflow-hidden">
+
+    <!-- HEADER -->
+    <ul class="grid grid-cols-3 md:grid-cols-7 gap-2 p-4
+               text-xs tracking-widest text-secondary
+               border-b border-primary bg-black/20">
+
+      <li>RANK</li>
+      <li class="hidden md:block">AVATAR</li>
+      <li>JOGADOR</li>
+      <li>PONTOS</li>
+      <li class="hidden md:block">PARTIDAS</li>
+      <li class="hidden md:block">WIN RATE</li>
+      <li class="hidden md:block">MELHOR TEMPO</li>
+
+    </ul>
+
+    <!-- LINHAS -->
+    <ul class="divide-y divide-primary/30">
+
+      <li *ngFor="let player of ranking"
+          class="grid grid-cols-3 md:grid-cols-7 gap-2 p-4
+                 items-center text-secondary
+                 hover:bg-primary/10 transition">
+
+        <!-- RANK -->
+        <span class="text-lg font-bold text-primary">
+          #{{ player.rank }}
+        </span>
+
+        <!-- AVATAR (desktop) -->
+        <span class="hidden md:flex justify-center">
+          <img [src]="player.avatar"
+               class="w-10 h-10 rounded-full border border-primary shadow-neon" />
+        </span>
+
+        <!-- JOGADOR -->
+        <div class="flex flex-col">
+
+          <span class="font-medium flex items-center gap-2">
+
+            <!-- avatar pequeno mobile -->
+            <img [src]="player.avatar"
+                 class="w-6 h-6 rounded-full border border-primary md:hidden" />
+
+            {{ player.nome }}
+          </span>
+
+          <!-- INFO EXTRA MOBILE -->
+          <span class="md:hidden text-xs text-secondary/70">
+            {{ player.partidas }} jogos • {{ player.winRate }}% • {{ player.melhorTempo }}
+          </span>
+
+        </div>
+
+        <!-- PONTOS -->
+        <span class="text-right md:text-left">
+          {{ player.pontos }}
+        </span>
+
+        <!-- RESTO (desktop only) -->
+        <span class="hidden md:block">{{ player.partidas }}</span>
+        <span class="hidden md:block">{{ player.winRate }}%</span>
+        <span class="hidden md:block">{{ player.melhorTempo }}</span>
+
+      </li>
+
+    </ul>
+
+    <!-- PAGINAÇÃO -->
+    <div class="flex justify-center items-center p-4 border-t border-primary">
+
+      <button
+        (click)="carregarMais()"
+        [disabled]="loading"
+        class="px-6 py-2 rounded-md border border-primary
+               text-secondary tracking-widest
+               transition flex items-center gap-2
+               hover:bg-primary/20
+               disabled:opacity-50 disabled:cursor-not-allowed">
+
+        <span *ngIf="loading" class="loader"></span>
+
+        {{ loading ? 'CARREGANDO...' : 'CARREGAR MAIS' }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</app-layout-conteiner>
+

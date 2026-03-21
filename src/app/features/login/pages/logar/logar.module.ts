@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 
 import { CommonModule } from "@angular/common";
-import { LogarRoutingModule } from "./logar-routing.module";
 import { LogarComponent } from "./logar.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [LogarComponent],
   imports: [
-    LogarRoutingModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
-  exports: []
+  exports: [LogarComponent]
 })
 export class LogarModule { }

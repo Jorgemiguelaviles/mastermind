@@ -1,0 +1,45 @@
+/* 📦 CAIXA DOS PINOS */
+.pinos-box {
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+
+  width: fit-content;
+}
+
+/* 🔲 GRID (tipo dado) */
+.pinos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+/* 🔘 PINO BASE */
+.pino {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow:
+    inset 0 0 3px rgba(255, 255, 255, 0.3),
+    0 0 4px rgba(0, 0, 0, 0.5);
+
+  transition: all 0.3s ease;
+}
+
+/* ⚫ PRETO */
+.pino.preto {
+  background: radial-gradient(circle at 30% 30%, #444, #000);
+}
+
+/* ⚪ BRANCO */
+.pino.branco {
+  background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+}
