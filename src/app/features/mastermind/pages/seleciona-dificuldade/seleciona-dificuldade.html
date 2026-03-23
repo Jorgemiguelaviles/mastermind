@@ -5,7 +5,11 @@
     [isBooting]="isBooting"
   >
 
-    <div class="h-full flex flex-col items-center justify-center text-center gap-10">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="postForm()"
+      class="h-full flex flex-col items-center justify-center text-center gap-10"
+    >
 
       <!-- 🎯 TÍTULO -->
       <h1 class="text-4xl md:text-5xl font-bold
@@ -19,67 +23,96 @@
 
         <!-- FÁCIL -->
         <button
-          (click)="selecionarDificuldade('facil')"
+          type="button"
+          (click)="setDificuldade('facil')"
+          [class.bg-green-400/20]="form.get('dificuldade')?.value === 'facil'"
           class="py-4 rounded-xl border border-primary
                  text-secondary tracking-widest
-                 backdrop-blur-md shadow-neon
-                 transition
-                 hover:scale-105
-                 hover:bg-green-400/20
-                 hover:shadow-[0_0_20px_#00ff88]">
+                 backdrop-blur-md shadow-neon transition
+                 hover:scale-105 hover:shadow-[0_0_20px_#00ff88]">
 
           FÁCIL
-
         </button>
 
         <!-- MÉDIO -->
         <button
-          (click)="selecionarDificuldade('medio')"
+          type="button"
+          (click)="setDificuldade('medio')"
+          [class.bg-blue-400/20]="form.get('dificuldade')?.value === 'medio'"
           class="py-4 rounded-xl border border-primary
                  text-secondary tracking-widest
-                 backdrop-blur-md shadow-neon
-                 transition
-                 hover:scale-105
-                 hover:bg-blue-400/20
-                 hover:shadow-[0_0_20px_#00ccff]">
+                 backdrop-blur-md shadow-neon transition
+                 hover:scale-105 hover:shadow-[0_0_20px_#00ccff]">
 
           MÉDIO
-
         </button>
 
         <!-- DIFÍCIL -->
         <button
-          (click)="selecionarDificuldade('dificil')"
+          type="button"
+          (click)="setDificuldade('dificil')"
+          [class.bg-yellow-400/20]="form.get('dificuldade')?.value === 'dificil'"
           class="py-4 rounded-xl border border-primary
                  text-secondary tracking-widest
-                 backdrop-blur-md shadow-neon
-                 transition
-                 hover:scale-105
-                 hover:bg-yellow-400/20
-                 hover:shadow-[0_0_20px_#ffcc00]">
+                 backdrop-blur-md shadow-neon transition
+                 hover:scale-105 hover:shadow-[0_0_20px_#ffcc00]">
 
           DIFÍCIL
-
         </button>
 
         <!-- INSANO -->
         <button
-          (click)="selecionarDificuldade('insano')"
+          type="button"
+          (click)="setDificuldade('insano')"
+          [class.bg-red-400/20]="form.get('dificuldade')?.value === 'insano'"
           class="py-4 rounded-xl border border-primary
                  text-secondary tracking-widest
-                 backdrop-blur-md shadow-neon
-                 transition
-                 hover:scale-105
-                 hover:bg-red-400/20
-                 hover:shadow-[0_0_20px_#ff3366]">
+                 backdrop-blur-md shadow-neon transition
+                 hover:scale-105 hover:shadow-[0_0_20px_#ff3366]">
 
           INSANO
-
         </button>
 
       </div>
 
+      <!-- 👁️ PREVIEW DA DIFICULDADE -->
+<div *ngIf="configSelecionada"
+     class="mt-8 flex flex-col items-center gap-6">
+
+  <!-- SLOTS -->
+  <div class="flex gap-3">
+    <div
+      *ngFor="let s of [].constructor(configSelecionada.slots)"
+      class="w-10 h-10 rounded-full border-2 border-primary shadow-neon">
     </div>
+  </div>
+
+  <!-- CORES -->
+  <div class="flex flex-wrap justify-center gap-2 max-w-xs">
+    <div
+      *ngFor="let c of [].constructor(configSelecionada.cores)"
+      class="w-6 h-6 rounded-full border border-white/30 bg-primary/40">
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <p class="text-secondary text-sm tracking-widest">
+    {{ configSelecionada.slots }} espaços • {{ configSelecionada.cores }} cores
+  </p>
+
+</div>
+
+      <!-- 🚀 BOTÃO SUBMIT -->
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="mt-6 px-6 py-3 rounded-xl bg-primary text-black font-bold
+               hover:scale-105 transition">
+
+        INICIAR JOGO
+      </button>
+
+    </form>
 
   </app-layout-conteiner>
 

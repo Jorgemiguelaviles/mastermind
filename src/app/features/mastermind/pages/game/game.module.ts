@@ -5,6 +5,7 @@ import { GameRoutingRoutingModule } from "./game-routing.module";
 import { PinosCertosModule } from "../../components/pinos-certos/pinos-certos.module";
 import { PinosSelecionadosModule } from "../../components/pinos-selecionados/pinos-selecionados.module";
 import { LayoutConteinerModule } from "../../../../shared/components/layout-conteiner/layout-conteiner.module";
+import { TimerModule } from "../../components/timer/timer.module";
 
 @NgModule({
   declarations: [GameComponent],
@@ -13,7 +14,8 @@ import { LayoutConteinerModule } from "../../../../shared/components/layout-cont
     GameRoutingRoutingModule,
     PinosCertosModule,
     PinosSelecionadosModule,
-    LayoutConteinerModule
+    LayoutConteinerModule,
+    TimerModule
 
   ]
 })

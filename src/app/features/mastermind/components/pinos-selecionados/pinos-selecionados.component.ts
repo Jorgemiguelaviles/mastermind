@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-pinos-selecionados',
@@ -8,6 +8,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PinosSelecionadosComponent {
 @Input() quantidade: number = 4;
+
+@Input() disabled: boolean = false;
+@Input() selecoesExternas: string[] = [];
+
+
+@Output() enviado = new EventEmitter<void>();
 
   @Input() cores: string[] = [
     '#ff0000',
@@ -19,9 +25,34 @@ export class PinosSelecionadosComponent {
   ];
 
   @Output() onEnviar = new EventEmitter<string[]>();
+  
 
   slots: number[] = [];
   selecoes: (string | null)[] = [];
+
+    ngOnChanges(changes: SimpleChanges) {
+
+    if (changes['quantidade']) {
+      this.initSlots();
+    }
+
+    if (changes['disabled']) {
+      // só força detecção, lógica já está protegida
+    }
+
+    if (changes['selecoesExternas']) {
+      this.selecoes = [...(this.selecoesExternas || [])];
+    }
+  }
+
+    private initSlots() {
+    this.slots = Array(this.quantidade).fill(0);
+    this.selecoes = Array(this.quantidade).fill(null);
+  }
+
+  
+
+
 
   ngOnInit() {
     this.slots = Array(this.quantidade).fill(0);
@@ -35,14 +66,13 @@ export class PinosSelecionadosComponent {
 }
 
   selecionarCor(index: number, cor: string) {
+    if (this.disabled) return;
     this.selecoes[index] = cor;
   }
 
   enviar() {
-    if (this.selecoes.includes(null)) {
-      alert('Preencha todos os pinos!');
-      return;
-    }
+    if (this.disabled) return;
+    this.enviado.emit();
 
     this.onEnviar.emit(this.selecoes as string[]);
   }

@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from "@angular/forms";
   declarations: [LogarComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [LogarComponent]
 })

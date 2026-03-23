@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { authGuard } from './core/guards/login.guard';
 
 const routes: Routes = [
 
@@ -15,35 +16,42 @@ const routes: Routes = [
       import('./features/login/login.module').then(m => m.LoginModule)
   },
 
+  // 🔥 BLOCO PROTEGIDO
   {
     path: '',
-    // canActivate: [], 
+    canActivate: [authGuard],
     children: [
+
       {
         path: 'main',
         loadChildren: () =>
           import('./features/home/home.module').then(m => m.HomeModule)
       },
+
       {
         path: 'dashboard',
         loadChildren: () =>
           import('./features/dashboards/dashboard.module').then(m => m.DashboardsModule)
       },
+
       {
         path: 'ranking',
         loadChildren: () =>
           import('./features/ranking/ranking.module').then(m => m.RankingModule)
       },
+
       {
         path: 'mastermind',
         loadChildren: () =>
           import('./features/mastermind/mastermind.module').then(m => m.MastermindModule)
       },
-       {
-  path: 'tutorial',
-  loadChildren: () =>
-    import('./features/regras/regras.module').then(m => m.RegrasModule)
-},
+
+      {
+        path: 'tutorial',
+        loadChildren: () =>
+          import('./features/regras/regras.module').then(m => m.RegrasModule)
+      }
+
     ]
   },
 

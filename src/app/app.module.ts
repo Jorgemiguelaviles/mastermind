@@ -4,6 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { FiltrosGeraisModule } from "./features/dashboards/components/filtros-gerais/filtors-gerais.module";
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { FiltrosGeraisModule } from "./features/dashboards/components/filtros-ge
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FiltrosGeraisModule
+    FiltrosGeraisModule,
+     HttpClientModule 
   ],
   bootstrap: [AppComponent]
 })

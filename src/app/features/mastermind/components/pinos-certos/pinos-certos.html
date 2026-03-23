@@ -1,11 +1,29 @@
-<div class="pinos-box">
+<!-- ⚫⚪ FEEDBACK (ÚNICO POR JOGADA) -->
+<div
+  *ngIf="resultado"
+  class="absolute bottom-0 left-0 p-2"
+>
 
-  <div class="pinos-grid">
-    <div
-      *ngFor="let pino of pinos"
-      class="pino"
-      [ngClass]="pino"
-    ></div>
+  <div class="grid grid-cols-2 gap-2 p-2 bg-black/30 rounded-lg backdrop-blur-md border border-white/10">
+
+    <ng-container *ngFor="let item of feedbackArray">
+
+      <!-- 🧱 CAIXA -->
+      <div class="w-6 h-6 flex items-center justify-center rounded-md bg-white/5 border border-white/10">
+
+        <!-- 🔘 BOLINHA -->
+        <div
+          class="w-4 h-4 rounded-full"
+          [ngClass]="{
+            'bg-gray-500 border border-gray-300': item === 'preto',
+            'bg-white border border-black': item === 'branco'
+          }"
+        ></div>
+
+      </div>
+
+    </ng-container>
+
   </div>
 
 </div>

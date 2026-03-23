@@ -16,7 +16,7 @@ export class RegrasComponent {
   }
 
   iniciarJogo() {
-    this.router.navigate(['/mastermind/jogo']);
+    this.router.navigate(['/mastermind/seleciona-dificuldade']);
   }
 
 }

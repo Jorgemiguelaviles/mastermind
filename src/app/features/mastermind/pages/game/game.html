@@ -1,10 +1,39 @@
-  <app-layout-conteiner
-    [isSwitchingTab]="isSwitchingTab"
-    [isBooting]="isBooting"
-  >
-<div *ngFor="let item of [].constructor(10)">
-  <app-pinos-selecionados></app-pinos-selecionados>
-</div>
+<app-layout-conteiner
+  [isSwitchingTab]="isSwitchingTab"
+  [isBooting]="isBooting"
+>
+
+  <div class="flex flex-col gap-6">
+    <app-timer></app-timer>
+
+    
+
+    <div
+      *ngFor="let item of [].constructor(totalRounds); let i = index"
+    >
+
+    
+
+      <!-- 🔥 só mostra o round atual -->
+      <div *ngIf="i <= currentRound"
+      
+           class="flex flex-col gap-3">
+
+           <div class="text-center text-secondary tracking-widest text-sm">
+      Rodada {{ i + 1 }} / {{ totalRounds }}
+    </div>
+
+        
+
+        <app-pinos-selecionados
+        [disabled]="i !== currentRound"
+          (enviado)="advanceRound()"
+        ></app-pinos-selecionados>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </app-layout-conteiner>
-
-

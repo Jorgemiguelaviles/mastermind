@@ -9,5 +9,13 @@ import { Component } from '@angular/core';
 export class GameComponent {
     isBooting = true;
   isSwitchingTab = false;
+  currentRound = 0;
+totalRounds = 10;
+
+advanceRound() {
+  if (this.currentRound < this.totalRounds - 1) {
+    this.currentRound++;
+  }
+}
 
 }

@@ -7,20 +7,24 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrl: './pinos-certos.css',
 })
 export class PinosCertosComponent {
-  @Input() pretos: number = 0;
-@Input() brancos: number = 0;
+  @Input() slots:number[] | undefined
+  resultado = {
+    pretos: 3,
+    brancos: 3
+  };
 
-pinos: ('preto' | 'branco')[] = [];
+  get feedbackArray(): string[] {
+    if (!this.resultado) return [];
 
-ngOnChanges(): void {
-  this.gerarPinos();
-}
+    const totalSlots = this.slots ? this.slots.length : 0;
 
-private gerarPinos(): void {
-  const pretosArray = Array.from({ length: this.pretos }, () => 'preto' as const);
-  const brancosArray = Array.from({ length: this.brancos }, () => 'branco' as const);
+    const pretos = Array(this.resultado.pretos).fill('preto');
+    const brancos = Array(this.resultado.brancos).fill('branco');
 
-  this.pinos = [...pretosArray, ...brancosArray];
-}
+    const feedback = [...pretos, ...brancos];
+
+    // ⚠️ nunca ultrapassa o número de slots
+    return feedback.slice(0, totalSlots);
+  }
 
 }

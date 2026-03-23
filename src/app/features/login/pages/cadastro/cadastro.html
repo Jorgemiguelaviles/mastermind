@@ -1,93 +1,115 @@
 <div class="w-full max-w-md sm:max-w-lg px-4">
 
-  <div class="w-full system-enter">
+  <div class="p-6 sm:p-8 rounded-2xl border border-primary shadow-neon backdrop-blur-md system-enter"
+       [class.system-exit]="saindo">
 
-    <div class="p-6 sm:p-8 rounded-2xl border border-primary shadow-neon backdrop-blur-md system-enter"
-     [class.system-exit]="saindo">
+    <h1 class="text-secondary text-xl sm:text-2xl text-center mb-6 tracking-widest">
+      NEW USER
+    </h1>
 
-      <h1 class="text-secondary shadow-neon-white text-xl sm:text-2xl text-center mb-6 tracking-widest">
-        NEW USER
-      </h1>
+    <form [formGroup]="form" class="flex flex-col gap-5">
 
-      <form class="flex flex-col gap-5">
+      <!-- AVATAR -->
+      <div class="flex flex-col items-center gap-2">
 
-        <!-- AVATAR -->
-        <div class="flex flex-col items-center gap-2">
+        <label class="cursor-pointer group relative">
 
-          <label class="cursor-pointer group relative">
+          <div class="w-20 h-20 rounded-full border border-primary
+                      flex items-center justify-center overflow-hidden
+                      transition duration-300
+                      group-hover:scale-110 group-hover:shadow-neon">
 
-            <div class="w-20 h-20 rounded-full border border-primary
-                        flex items-center justify-center overflow-hidden
-                        transition duration-300
-                        group-hover:scale-110 group-hover:shadow-neon">
+            <img *ngIf="preview"
+                 [src]="preview"
+                 class="w-full h-full object-cover"/>
 
-              <img *ngIf="preview"
-                   [src]="preview"
-                   class="w-full h-full object-cover"/>
+            <span *ngIf="!preview"
+                  class="text-white text-xl">+</span>
 
-              <span *ngIf="!preview"
-                    class="text-white text-xl">+</span>
+          </div>
 
-            </div>
+          <input type="file"
+                 (change)="onFileSelected($event)"
+                 class="hidden"/>
+        </label>
 
-            <input type="file"
-                   (change)="onFileSelected($event)"
-                   class="hidden"/>
+        <span class="text-xs text-secondary opacity-70">
+          Escolher avatar
+        </span>
 
-          </label>
-
-          <span class="text-xs text-secondary opacity-70">
-            Escolher avatar
-          </span>
-
-        </div>
-
-        <!-- INPUTS -->
-        <input type="text" placeholder="Username"
-          class="bg-transparent border border-primary px-3 py-2 sm:px-4 sm:py-2.5
-                 rounded-md text-white focus:shadow-neon text-sm sm:text-base"/>
-
-        <input type="email" placeholder="Email"
-          class="bg-transparent border border-primary px-3 py-2 sm:px-4 sm:py-2.5
-                 rounded-md text-white focus:shadow-neon text-sm sm:text-base"/>
-
-        <input type="password" placeholder="Senha"
-          class="bg-transparent border border-primary px-3 py-2 sm:px-4 sm:py-2.5
-                 rounded-md text-white focus:shadow-neon text-sm sm:text-base"/>
-
-        <!-- GOOGLE BUTTON -->
-        <!-- <button type="button"
-          (click)="loginGoogle()"
-          [disabled]="loadingGoogle"
-          class="flex items-center justify-center gap-2
-                border border-primary text-primary py-2 rounded-md
-                transition duration-300
-                hover:shadow-neon hover:scale-105
-                disabled:opacity-50 disabled:cursor-not-allowed">
-
-          <span *ngIf="loadingGoogle" class="loader"></span>
-
-          <span *ngIf="!loadingGoogle" class="text-lg">🌐</span>
-
-          {{ loadingGoogle ? 'AUTENTICANDO...' : 'CONTINUAR COM GOOGLE' }}
-        </button> -->
-
-        <!-- SUBMIT -->
-        <button
-          class="bg-primary text-black font-bold py-2 sm:py-2.5
-                 rounded-md shadow-neon hover:scale-105 transition text-sm sm:text-base">
-          CRIAR CONTA
-        </button>
-
-      </form>
-
-      <div class="mt-6 text-center">
-        <button (click)="voltarLogin()"
-          class="cursor-pointer text-secondary hover:text-primary hover:shadow-neon-white transition duration-300 text-sm sm:text-base">
-          Voltar
-        </button>
       </div>
 
+      <!-- USERNAME -->
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="Username"
+        class="bg-transparent border border-primary px-3 py-2
+               rounded-md text-white focus:shadow-neon text-sm sm:text-base"/>
+
+      <small class="text-red-400 text-xs"
+        *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
+        Username obrigatório
+      </small>
+
+      <!-- EMAIL -->
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        class="bg-transparent border border-primary px-3 py-2
+               rounded-md text-white focus:shadow-neon text-sm sm:text-base"/>
+
+      <small class="text-red-400 text-xs"
+        *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        Email inválido
+      </small>
+
+      <!-- SENHA -->
+      <input
+        type="password"
+        formControlName="senha"
+        placeholder="Senha forte"
+        class="bg-transparent border border-primary px-3 py-2
+               rounded-md text-white focus:shadow-neon text-sm sm:text-base"/>
+
+      <!-- ERRO SENHA FORTE -->
+      <small class="text-red-400 text-xs"
+        *ngIf="form.get('senha')?.errors?.['strongPassword'] && form.get('senha')?.touched">
+
+        Senha fraca:
+        precisa de maiúscula, minúscula, número e símbolo.
+      </small>
+
+      <div *ngIf="errorMessage"
+          class="mb-4 text-red-400 text-sm text-center animate-pulse">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="successMessage"
+          class="mb-4 text-green-400 text-sm text-center animate-pulse">
+        {{ successMessage }}
+      </div>
+
+      <!-- BOTÃO -->
+      <button
+        type="button"
+        (click)="criarConta()"
+        [disabled]="form.invalid"
+        class="bg-primary text-black font-bold py-2
+               rounded-md shadow-neon hover:scale-105 transition
+               disabled:opacity-50 disabled:cursor-not-allowed">
+
+        CRIAR CONTA
+      </button>
+
+    </form>
+
+    <div class="mt-6 text-center">
+      <button (click)="voltarLogin()"
+        class="text-secondary hover:text-primary transition text-sm sm:text-base">
+        Voltar
+      </button>
     </div>
 
   </div>

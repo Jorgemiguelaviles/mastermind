@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/api-services/auth-service/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
 export class MenuComponent {
   @Input() soundMuted: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private authService: AuthService
+  ) {}
   toggleSoundClicked() {
      this.soundMuted = !this.soundMuted;
 
@@ -20,13 +23,11 @@ export class MenuComponent {
     // logica para abrir o menu
   }
   
-  logoutClicked() {
-  // limpa token / sessão
-  localStorage.clear();
+logoutClicked() {
+    this.authService.logout(); // 👈 centralizado no service
+    this.router.navigate(['/login']);
+  }
 
-  // redireciona para login
-  this.router.navigate(['/login']);
-
-}}
+}
 
 
