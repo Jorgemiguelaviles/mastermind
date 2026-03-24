@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGameService } from '../../../../core/services/form-game/form-game.service';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from '../../../../core/services/api-services/auth-service/auth.service';
+import { GameService } from '../../../../core/services/api-services/game-service/game-service';
 
 @Component({
   selector: 'app-seleciona-dificuldade',
@@ -31,6 +32,7 @@ dificuldadesConfig: any = {
     private router: Router,
     private formGameService: FormGameService,
     private authService: AuthService,
+    private gameService: GameService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,13 @@ setDificuldade(nivel: string | null) {
   this.form.get('dificuldade')?.setValue(nivel);
 }
 
+// --- Listeners ---
+  @HostListener('window:beforeunload', ['$event'])
+  confirmExit(event: BeforeUnloadEvent) {
+    event.preventDefault();
+    event.returnValue = true;
+  }
+
 
   postForm() {
 
@@ -53,21 +62,25 @@ setDificuldade(nivel: string | null) {
 
     const formData = new FormData();
 
-    console.log("FORM VALUE:", this.form.value);
-    console.log("ID USER:", id_usuario);
-
     formData.append('dificuldade', this.form.value.dificuldade);
     formData.append('id_usuario', String(id_usuario));
 
     // this.router.navigate(['/mastermind/jogo']);
-    this.formGameService.postForm(formData).subscribe({
+    this.gameService.createNovoJogo(formData).subscribe({
     next: (res) => {
-      console.log('Sucesso:', res);
-      // this.router.navigate(['/mastermind/jogo']);
-    },
+  console.log('Sucesso:', res);
+
+  this.formGameService.setListaCores(res.response.lista_cores);
+  this.formGameService.setNGaps(res.response.n_de_espacos);
+  this.formGameService.ativarSession()
+  this.formGameService.setIdPartida(res.response.id_partida)
+
+  this.router.navigate(['/mastermind/jogo']);
+},
     error: (err) => {
       console.error('Erro:', err);
     }
-  });
+  }
+);
   }
 }

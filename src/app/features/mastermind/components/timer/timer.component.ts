@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+// timer.component.ts
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-timer',
@@ -6,39 +7,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./timer.css'],
   standalone: false
 })
-export class TimerComponent implements OnInit, OnDestroy {
+export class TimerComponent {
+  @Input() tempo: number = 0; // Recebe o número puro do pai
 
-  tempo: number = 0; // em segundos
-  interval: any;
-
-  ngOnInit(): void {
-    this.iniciarTimer();
-  }
-
-  ngOnDestroy(): void {
-    this.pararTimer();
-  }
-
-  iniciarTimer() {
-    this.interval = setInterval(() => {
-      this.tempo++;
-    }, 1000);
-  }
-
-  pararTimer() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-  }
-
-  resetarTimer() {
-    this.tempo = 0;
-  }
-
-  formatarTempo(): string {
+  // A formatação visual fica no filho para manter o template limpo
+  formatarVisual(): string {
     const minutos = Math.floor(this.tempo / 60);
     const segundos = this.tempo % 60;
-
     return `${this.pad(minutos)}:${this.pad(segundos)}`;
   }
 

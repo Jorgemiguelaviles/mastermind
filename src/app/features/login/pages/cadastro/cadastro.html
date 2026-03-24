@@ -1,6 +1,6 @@
 <div class="w-full max-w-md sm:max-w-lg px-4">
 
-  <div class="p-6 sm:p-8 rounded-2xl border border-primary shadow-neon backdrop-blur-md system-enter"
+  <div class="p-6 sm:p-15 rounded-2xl border border-primary shadow-neon backdrop-blur-md system-enter"
        [class.system-exit]="saindo">
 
     <h1 class="text-secondary text-xl sm:text-2xl text-center mb-6 tracking-widest">
@@ -78,7 +78,7 @@
         *ngIf="form.get('senha')?.errors?.['strongPassword'] && form.get('senha')?.touched">
 
         Senha fraca:
-        precisa de maiúscula, minúscula, número e símbolo.
+        precisa de maiúscula, minúscula, número, símbolo e mais de 8 caractres.
       </small>
 
       <div *ngIf="errorMessage"

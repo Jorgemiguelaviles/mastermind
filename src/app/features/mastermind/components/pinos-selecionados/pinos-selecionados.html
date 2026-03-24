@@ -1,31 +1,26 @@
-<div class="w-full flex flex-col gap-8 px-4 relative">
+<div class="w-full flex flex-col gap-8 px-4 relative" [formGroup]="formGroupPrincipal">
 
-  <!-- 🔲 SLOTS -->
   <div
     class="grid gap-6 justify-center"
     [ngStyle]="{
       'grid-template-columns': 'repeat(auto-fit, minmax(80px, 1fr))',
-      'max-width': slots.length * 100 + 'px',
+      'max-width': pinosArray.length * 100 + 'px',
       'margin': '0 auto'
     }"
   >
-
     <div
-      *ngFor="let slot of slots; let i = index"
+      *ngFor="let pino of pinosArray.controls; let i = index"
       class="flex flex-col items-center gap-3"
     >
 
-      <!-- 🎯 SLOT -->
       <div
         class="w-12 h-12 rounded-full border-2 border-primary shadow-neon transition"
         [ngStyle]="{
-          'background-color': selecoes[i] || 'transparent'
+          'background-color': pino.value || 'transparent'
         }"
       ></div>
 
-      <!-- 🎨 CORES -->
       <div class="flex flex-wrap justify-center gap-2 max-w-[100px]">
-
         <div
           *ngFor="let cor of cores"
           (click)="selecionarCor(i, cor)"
@@ -35,36 +30,21 @@
           [class.pointer-events-none]="disabled"
           [class.opacity-40]="disabled"
         ></div>
-
       </div>
 
     </div>
-
   </div>
 
-  <!-- 🚀 BOTÃO -->
   <div class="flex justify-center mt-4" *ngIf="isCompleto()">
-
     <button
       (click)="enviar()"
-      class="flex items-center gap-3
-             px-6 py-3
-             rounded-xl border border-primary
-             text-white tracking-widest
-             backdrop-blur-md shadow-neon
-             transition
-             hover:scale-105
-             hover:bg-primary/20
-             hover:shadow-[0_0_20px_#00ffff]">
-
+      class="flex items-center gap-3 px-6 py-3 rounded-xl border border-primary text-white tracking-widest backdrop-blur-md shadow-neon transition hover:scale-105 hover:bg-primary/20 hover:shadow-[0_0_20px_#00ffff]"
+    >
       ENVIAR
       <span class="text-xl">➡️</span>
-
     </button>
-
   </div>
 
-  <app-pinos-certos
-  [slots]="slots"></app-pinos-certos>
+  <app-pinos-certos [resultado]="resultado" [slots]="slots"></app-pinos-certos>
 
 </div>

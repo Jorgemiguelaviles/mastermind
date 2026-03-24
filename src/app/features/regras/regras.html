@@ -1,90 +1,80 @@
-<div class="min-h-screen flex flex-col items-center justify-center px-4 py-6">
+<div class="min-h-screen flex flex-col items-center justify-center px-4 py-6 bg-background">
 
-  <!-- CONTAINER -->
-<div class="w-full max-w-3xl
-            rounded-2xl border border-primary
-            backdrop-blur-md shadow-neon
-            flex flex-col overflow-hidden
-            animate-fade-in">
+  <div class="w-full max-w-3xl rounded-2xl border border-primary bg-black/40 backdrop-blur-md shadow-neon flex flex-col overflow-hidden animate-fade-in">
 
-    <!-- HEADER -->
-    <div class="border-b border-primary p-5 text-center">
-
-      <h1 class="text-3xl text-primary tracking-widest">
-        REGRAS
+    <div class="border-b border-primary p-5 bg-primary/10">
+      <h1 class="text-3xl text-primary tracking-[0.2em] font-bold text-center uppercase">
+        Diretrizes da Missão
       </h1>
-
     </div>
 
-    <!-- CONTEÚDO (SCROLL) -->
-    <div class="p-6 overflow-y-auto max-h-[65vh] text-secondary space-y-4
-                custom-scroll">
+    <div class="p-8 overflow-y-auto max-h-[65vh] text-secondary custom-scroll space-y-8">
+      
+      <section>
+        <h2 class="text-xl text-primary mb-3 flex items-center gap-2">
+          <span class="w-2 h-6 bg-primary rounded-full"></span> O OBJETIVO
+        </h2>
+        <p class="leading-relaxed opacity-90">
+          Decifre a <strong>sequência secreta</strong> de cores gerada pelo sistema. Use lógica e as pistas recebidas para vencer antes que suas tentativas esgotem.
+        </p>
+      </section>
 
-      <h1 class="text-3xl text-primary tracking-widest">
-        Como Jogar Mastermind
-      </h1>
-        Mastermind é um jogo de lógica e dedução em que o objetivo é descobrir uma sequência secreta de cores criada pelo sistema. O jogador deve usar raciocínio lógico e as pistas fornecidas após cada tentativa para chegar à combinação correta dentro de um número limitado de tentativas.
-        No início de cada partida, o sistema gera automaticamente uma sequência secreta composta por cores. Essa sequência permanece oculta durante todo o jogo, e o jogador precisa descobri-la por meio de tentativas e análise das respostas fornecidas pelo sistema.
-        Durante cada rodada, o jogador escolhe uma sequência de cores e envia sua tentativa. Após isso, o sistema analisa a tentativa e retorna algumas pistas que indicam o quão próxima aquela sequência está da combinação correta.
-        Essas pistas são representadas por indicadores que ajudam o jogador a entender quais partes da tentativa estão corretas e quais precisam ser ajustadas.
-        Os indicadores funcionam da seguinte forma:
-        • Um indicador de cor preta significa que uma das cores escolhidas pelo jogador está correta e também está na posição correta dentro da sequência.
-        • Um indicador de cor branca significa que uma das cores escolhidas está correta, porém foi colocada na posição errada.
-        Essas pistas não indicam exatamente qual posição está correta ou qual cor gerou a pista. O jogador deve usar lógica e análise para interpretar as informações e melhorar suas próximas tentativas.
-        Por exemplo, imagine que o jogador faça a seguinte tentativa:
-        🔴 🔵 🟢 🟡
-        E o sistema retorne as pistas:
-        🔘 ⚪
-        Isso significa que:
-        • Uma das cores está correta e na posição correta.
-        • Outra cor está correta, porém na posição errada.
-        A partir dessas informações, o jogador precisa ajustar sua próxima tentativa tentando aproximar-se cada vez mais da sequência secreta.
-        Cada partida possui um número limitado de tentativas. Normalmente, o jogador terá até 10 tentativas para descobrir a sequência correta. Se a sequência for descoberta dentro desse limite, o jogador vence a partida. Caso contrário, o jogo termina e a sequência secreta é revelada.
+      <section class="grid md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl border border-white/10 bg-white/5">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-4 h-4 rounded-full bg-zinc-500 shadow-[0_0_8px_#9ca3af]"></div>
+            <h3 class="text-primary font-bold">Pino Cinza</h3>
+          </div>
+          <p class="text-sm opacity-80">Cor correta, mas na <strong>posição errada</strong>.</p>
+        </div>
 
-        <h1 class="text-3xl text-primary tracking-widest">
-        Sistema de pontuação
-      </h1>
-        Além do desafio lógico, o jogo possui um sistema de pontuação que recompensa jogadores que conseguem resolver o desafio com eficiência, utilizando menos tentativas e menos tempo.
-A pontuação final de cada partida é calculada a partir da seguinte fórmula:
-Pontuação = base + bônus de tentativas + bônus de tempo
-Caso o jogador perca a partida, uma penalidade é aplicada.
-Pontuação Base
-Ao vencer uma partida, o jogador recebe uma pontuação base. Essa pontuação é utilizada como referência para o cálculo final dos bônus.
-Após uma vitória, o jogo é reiniciado automaticamente para uma nova partida.
-Bônus por Tentativas
-Jogadores que conseguem descobrir a sequência secreta utilizando menos tentativas recebem um bônus adicional de pontos.
-Tentativas usadas
-Bônus
-1 – 3 tentativas
-+50 pontos
-4 – 5 tentativas
-+30 pontos
-6 – 7 tentativas
-+10 pontos
-8 ou mais
-+0 pontos
-Isso incentiva o jogador a resolver o desafio da forma mais eficiente possível.
-Bônus por Tempo
-Além do número de tentativas, o tempo gasto para resolver o desafio também influencia na pontuação final.
-Tempo para resolver
-Bônus
-Menos de 60 segundos
-+30 pontos
-Menos de 120 segundos
-+20 pontos
-Menos de 180 segundos
-+10 pontos
-Jogadores que resolvem o desafio rapidamente recebem uma recompensa maior.
-Bônus por dificuldade 
-Fácil = +10
-Médio = +20
-Difícil = +30
-Insano = +40
-Penalidade por Derrota
-Caso o jogador não consiga descobrir a sequência secreta dentro do número limite de tentativas, a partida será considerada uma derrota.
-Nesse caso, será aplicada uma penalidade de:
--20 pontos
-Essa penalidade ajuda a manter o equilíbrio do ranking e incentiva os jogadores a melhorarem suas estratégias.
+        <div class="p-4 rounded-xl border border-white/10 bg-white/5">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-4 h-4 rounded-full bg-white shadow-[0_0_8px_#ffffff]"></div>
+            <h3 class="text-primary font-bold">Pino Branco</h3>
+          </div>
+          
+
+          <p class="text-sm opacity-80">Cor correta na <strong>posição exata</strong>.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl text-primary mb-4 flex items-center gap-2">
+          <span class="w-2 h-6 bg-primary rounded-full"></span> SISTEMA DE PONTUAÇÃO
+        </h2>
+        
+        <div class="overflow-hidden rounded-lg border border-white/10">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-primary/20 text-primary uppercase">
+              <tr>
+                <th class="p-3">Categoria</th>
+                <th class="p-3">Critério</th>
+                <th class="p-3">Bônus</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/10">
+              <tr>
+                <td class="p-3 font-bold">Tentativas</td>
+                <td class="p-3">1 – 3 / 4 – 5 / 6 – 7</td>
+                <td class="p-3 text-cyan-400">+50 / +30 / +10</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">Tempo</td>
+                <td class="p-3">&lt; 60s / &lt; 120s / &lt; 180s</td>
+                <td class="p-3 text-cyan-400">+30  +20 / +10</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold">Dificuldade</td>
+                <td class="p-3">F / M / D / I</td>
+                <td class="p-3 text-cyan-400">+10 / +20 / +30 / +40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      
 
     </div>
 
@@ -122,5 +112,4 @@ Essa penalidade ajuda a manter o equilíbrio do ranking e incentiva os jogadores
     </div>
 
   </div>
-
 </div>

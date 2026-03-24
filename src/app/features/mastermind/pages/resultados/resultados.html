@@ -1,73 +1,58 @@
-<div class="min-h-screen flex items-center justify-center px-4 py-6">
+<div class="min-h-screen flex items-center justify-center px-4 py-6 font-mono">
 
-  <!-- CONTAINER -->
-  <div class="w-full max-w-3xl
-              rounded-2xl border border-primary
-              backdrop-blur-md shadow-neon
-              flex flex-col p-6 gap-6 animate-fade-in">
+  <div class="w-full max-w-lg
+              rounded-2xl border-2
+              backdrop-blur-xl shadow-2xl
+              flex flex-col p-8 gap-8 animate-fade-in"
+       [ngClass]="venceu ? 'border-green-500 shadow-green-900/20' : 'border-red-500 shadow-red-900/20'">
 
-    <!-- RESULTADO -->
-    <div class="text-center">
-
-      <h1
-        class="text-4xl tracking-widest font-bold"
-        [ngClass]="venceu ? 'text-green-400' : 'text-red-400'">
-
-        {{ venceu ? 'VOCÊ VENCEU' : 'VOCÊ PERDEU' }}
-
+    <div class="text-center space-y-2">
+      <p class="text-secondary tracking-[0.3em] text-sm uppercase">Status da Missão</p>
+      <h1 class="text-5xl tracking-tighter font-black italic"
+          [ngClass]="venceu ? 'text-green-400' : 'text-red-400'">
+        {{ venceu ? 'VITÓRIA' : 'DERROTA' }}
       </h1>
-
-    </div>
-
-    <!-- INFO PRINCIPAL -->
-    <div class="flex flex-col gap-4 text-center">
-
-      <p [ngClass]="venceu ? 'text-green-300' : 'text-red-300'">
-        Dificuldade: {{ dificuldade }}
+      
+      <p class="text-xs font-bold tracking-[0.5em] uppercase opacity-70"
+         [ngClass]="venceu ? 'text-green-200' : 'text-red-200'">
+        Nível: {{ dificuldade }}
       </p>
-
-      <p [ngClass]="venceu ? 'text-green-300' : 'text-red-300'">
-        Tempo: {{ tempo }}
-      </p>
-
     </div>
 
-    <!-- DASHBOARD SIMPLES -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+    <hr class="opacity-10" [ngClass]="venceu ? 'border-green-500' : 'border-red-500'">
 
-      <div class="p-4 rounded-xl border border-primary text-center backdrop-blur-md">
-        <p class="text-xs text-secondary">Média de Tempo</p>
-        <p class="text-lg text-white">{{ stats.mediaTempo }}</p>
+    <div class="flex flex-col gap-6">
+      
+      <div class="text-center group">
+        <p class="text-xs text-secondary mb-1 tracking-widest uppercase">Pontos Obtidos</p>
+        <p class="text-7xl font-bold text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+          {{ pontuacao }}
+        </p>
       </div>
 
-      <div class="p-4 rounded-xl border border-primary text-center backdrop-blur-md">
-        <p class="text-xs text-secondary">Melhor Tempo</p>
-        <p class="text-lg text-white">{{ stats.melhorTempo }}</p>
-      </div>
-
-      <div class="p-4 rounded-xl border border-primary text-center backdrop-blur-md">
-        <p class="text-xs text-secondary">Win Rate</p>
-        <p class="text-lg text-white">{{ stats.winRate }}%</p>
+      <div class="flex items-center justify-center gap-3 p-4 rounded-xl bg-black/40 border border-white/10 shadow-inner">
+        <div class="flex flex-col items-center">
+            <span class="text-[10px] text-secondary uppercase tracking-[0.2em]">Tempo de Operação</span>
+            <span class="text-2xl text-white font-mono font-bold">{{ tempo }}s</span>
+        </div>
       </div>
 
     </div>
 
-    <!-- BOTÃO -->
-    <div class="flex justify-center mt-6">
-
+    <div class="flex justify-center mt-4">
       <button
         (click)="voltarInicio()"
-        class="px-8 py-3 rounded-xl border border-primary
-               text-secondary tracking-widest
-               transition transform
-               hover:scale-105
-               hover:bg-primary/20
-               hover:shadow-[0_0_25px_#00ffff]">
-
-        VOLTAR AO INÍCIO
-
+        class="group relative px-10 py-4 rounded-full border bg-transparent
+               text-white font-bold tracking-[0.2em] overflow-hidden
+               transition-all duration-300
+               hover:text-black"
+        [ngClass]="venceu ? 'border-green-500 hover:bg-green-500' : 'border-red-500 hover:bg-red-500'">
+        
+        <span class="relative z-10">REINICIAR JOGO</span>
+        
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 blur-md transition-opacity"
+             [ngClass]="venceu ? 'bg-green-400' : 'bg-red-400'"></div>
       </button>
-
     </div>
 
   </div>

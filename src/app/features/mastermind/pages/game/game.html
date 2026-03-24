@@ -4,7 +4,7 @@
 >
 
   <div class="flex flex-col gap-6">
-    <app-timer></app-timer>
+    <app-timer [tempo]="tempo"></app-timer>
 
     
 
@@ -27,6 +27,7 @@
 
         <app-pinos-selecionados
         [disabled]="i !== currentRound"
+        (venceu_partida)="venceu_partida($event)"
           (enviado)="advanceRound()"
         ></app-pinos-selecionados>
 

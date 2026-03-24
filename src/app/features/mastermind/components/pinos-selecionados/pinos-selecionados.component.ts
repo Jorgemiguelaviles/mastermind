@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, OnChanges } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { FormGameService } from '../../../../core/services/form-game/form-game.service';
+import { AuthService } from '../../../../core/services/api-services/auth-service/auth.service';
+import { ResultadoFeedback } from '../../../../core/interfaces/models/ResultadoFeedback';
 
 @Component({
   selector: 'app-pinos-selecionados',
@@ -6,75 +12,124 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
   templateUrl: './pinos-selecionados.html',
   styleUrl: './pinos-selecionados.css',
 })
-export class PinosSelecionadosComponent {
-@Input() quantidade: number = 4;
-
-@Input() disabled: boolean = false;
-@Input() selecoesExternas: string[] = [];
-
-
-@Output() enviado = new EventEmitter<void>();
-
-  @Input() cores: string[] = [
-    '#ff0000',
-    '#00ff00',
-    '#0000ff',
-    '#ffff00',
-    '#ff00ff',
-    '#00ffff'
-  ];
-
-  @Output() onEnviar = new EventEmitter<string[]>();
-  
-
+export class PinosSelecionadosComponent implements OnInit, OnChanges {
+  // --- Propriedades de Estado ---
+  quantidade: number = 4;
+  cores: string[] = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
   slots: number[] = [];
-  selecoes: (string | null)[] = [];
+  
+  // --- Formulários ---
+  form!: FormGroup; // Provindo do Service
+  formGroupPrincipal!: FormGroup; // Gerencia os pinos localmente
 
-    ngOnChanges(changes: SimpleChanges) {
+  // --- Inputs e Outputs ---
+  @Input() disabled: boolean = false;
+  @Input() selecoesExternas: string[] = [];
+  
+  @Output() venceu_partida = new EventEmitter<boolean>();
 
-    if (changes['quantidade']) {
-      this.initSlots();
-    }
+  @Output() enviado = new EventEmitter<void>();
+  @Output() onEnviar = new EventEmitter<string[]>();
 
-    if (changes['disabled']) {
-      // só força detecção, lógica já está protegida
-    }
-
-    if (changes['selecoesExternas']) {
-      this.selecoes = [...(this.selecoesExternas || [])];
-    }
-  }
-
-    private initSlots() {
-    this.slots = Array(this.quantidade).fill(0);
-    this.selecoes = Array(this.quantidade).fill(null);
-  }
+  resultado: ResultadoFeedback = { cinzas: 0, brancos: 0 };
 
   
 
-
-
-  ngOnInit() {
-    this.slots = Array(this.quantidade).fill(0);
-    this.selecoes = Array(this.quantidade).fill(null);
+  constructor(
+    private formGameService: FormGameService,
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
+    this.initFormGroup();
   }
 
+  // --- Getters ---
+  get pinosArray() {
+    return this.formGroupPrincipal.get('pinos') as FormArray;
+  }
+
+  // --- Lifecycle Hooks ---
+  ngOnInit() {
+    this.form = this.formGameService.getFormValue();
+    this.quantidade = parseInt(this.formGameService.getNGaps());
+    this.cores = this.formGameService.getListaCores();
+
+    // Inicializa os slots após carregar os dados do serviço
+    this.buildSlots();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['quantidade']) {
+      this.buildSlots();
+    }
+
+    if (changes['selecoesExternas'] && this.pinosArray.length > 0) {
+      this.selecoesExternas.forEach((cor, i) => {
+        if (this.pinosArray.at(i)) {
+          this.pinosArray.at(i).setValue(cor);
+        }
+      });
+    }
+  }
+
+  // --- Métodos Privados ---
+  private initFormGroup() {
+    this.formGroupPrincipal = this.fb.group({
+      pinos: this.fb.array([])
+    });
+  }
+
+  private buildSlots() {
+    // Limpa o array atual de forma eficiente
+    while (this.pinosArray.length !== 0) {
+      this.pinosArray.removeAt(0);
+    }
+
+    // Cria novos controles com base na quantidade
+    for (let i = 0; i < this.quantidade; i++) {
+      const valorInicial = this.selecoesExternas[i] || null;
+      this.pinosArray.push(this.fb.control(valorInicial, Validators.required));
+    }
+  }
+
+  // --- Métodos Públicos / Ações ---
   isCompleto(): boolean {
-  return this.slots?.length > 0 &&
-         this.selecoes?.length === this.slots.length &&
-         this.slots.every((_, i) => this.selecoes[i]);
-}
+    return this.formGroupPrincipal.valid;
+  }
 
   selecionarCor(index: number, cor: string) {
     if (this.disabled) return;
-    this.selecoes[index] = cor;
+    this.pinosArray.at(index).setValue(cor);
   }
 
   enviar() {
-    if (this.disabled) return;
-    this.enviado.emit();
+    if (this.disabled || this.formGroupPrincipal.invalid) return;
 
-    this.onEnviar.emit(this.selecoes as string[]);
+    const tentativa = this.formGroupPrincipal.value.pinos;
+    const id_usuario = this.authService.getUserId();
+    const formData = new FormData();
+
+    formData.append('tentativa', tentativa);
+    formData.append('id_partida', this.formGameService.getIdPartida());
+
+    this.formGameService.adicionarTentativa(formData, tentativa).subscribe({
+      next: (res) => {
+        console.log('Sucesso:', res);
+        this.resultado = { cinzas: res.response.pinos_cinzas, brancos: res.response.pinos_branco };
+        this.formGameService.setResultadoRodada(this.resultado)
+
+        if(res.response.venceu_partida){
+          this.venceu_partida.emit(res.response.venceu_partida)
+        }
+        this.enviado.emit();
+        this.onEnviar.emit(tentativa);
+      },
+      error: (err) => {
+        console.error('Erro:', err);
+      }
+    });
+
+    
   }
-  
 }
